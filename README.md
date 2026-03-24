@@ -97,6 +97,3 @@ python -m pytest tests/test_skills.py tests/test_agents.py
 - 涉及功能安全结论时，优先结合 `skills/automotive-safety/` 与 `rules/` 对齐术语和约束
 - 若只想降低成本，可减少 `-r` 轮数，或后续改为单模型执行模式
 
-## 许可
-
-本项目遵循 [MIT License](LICENSE)。
