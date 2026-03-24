@@ -1,8 +1,9 @@
 # Automotive Cursor Agents（汽车工程智能助手库）
 
-本项目是面向 Cursor 的汽车软件工程知识与流程增强仓库，覆盖 ADAS、功能安全、AUTOSAR、诊断、网络安全、电池管理等核心域。
+本项目主要基于开源项目 [theja0473/automotive-claude-code-agents](https://github.com/theja0473/automotive-claude-code-agents) 进行 Cursor 化迁移与增强。
+由于部分人群无法访问claude code，这里对源项目进行基于Cursor/DeepSeek的适配。
 
-> 上游来源：本项目主要基于开源项目 [theja0473/automotive-claude-code-agents](https://github.com/theja0473/automotive-claude-code-agents) 进行 Cursor 化迁移与增强。
+_本项目主要使用Cursor Agent完成迁移，可能存在功能不完善的情况，后续会持续更新_
 
 ## 项目定位
 
@@ -31,7 +32,7 @@ python tools/llm_council.py "Generate FTA for overcurrent protection in ASIL-D B
 ## 运行前提
 
 - Python 3.10+（推荐 3.11/3.12）
-- 可访问 DeepSeek API（默认 `https://api.deepseek.com`）
+- 已购买并创建 DEEPSEEK API KEY（默认 `https://api.deepseek.com`）
 - 已配置 `DEEPSEEK_API_KEY` 或已执行 `python -m tools.cursor_setup`
 
 ## Key 持久化机制
