@@ -1,0 +1,52 @@
+{
+  "_comment": "Automotive Claude Code Agents — Settings Merge Snippet",
+  "_instructions": [
+    "This file is NOT automatically applied to your settings.json.",
+    "To enable automotive hooks, MANUALLY merge the entries below into",
+    "your existing ~/.claude/settings.json under the appropriate sections.",
+    "Or run: claude /update-config to have Claude help you merge it."
+  ],
+  "hooks_to_add": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/automotive-pre-commit-misra-check.sh",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/automotive-pre-commit-safety-annotation.sh",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/automotive-pre-commit-autosar-naming.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "permissions_to_add": {
+    "allow": [
+      "Bash(python-can:*)",
+      "Bash(cantools:*)",
+      "Bash(cppcheck:*)"
+    ]
+  }
+}

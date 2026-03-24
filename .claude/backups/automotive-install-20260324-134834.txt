@@ -1,0 +1,10 @@
+Automotive Claude Code Agents — Installation Record
+Date: 2026-03-24T13:48:34+08:00
+Source: /c/Users/ASUS/automotive-claude-code-agents
+Target: /c/Users/ASUS/automotive-claude-code-agents/.claude
+Manifest: /c/Users/ASUS/automotive-claude-code-agents/.claude/.automotive-manifest
+
+This installation APPENDED automotive content to your existing workspace.
+Nothing was replaced or overwritten.
+
+To uninstall: /c/Users/ASUS/automotive-claude-code-agents/install.sh --uninstall

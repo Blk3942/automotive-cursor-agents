@@ -1,0 +1,27 @@
+---
+description: Automotive repo in Cursor — DeepSeek key, LLM Council, where domain content lives
+alwaysApply: true
+---
+
+# Automotive Claude Code Agents（Cursor 用法）
+
+## DeepSeek API Key（首次配置 + 持久化）
+
+1. 在仓库根目录终端执行：**`python -m tools.cursor_setup`**
+2. 按提示输入 Key（输入不回显）。会写入用户目录 **`%USERPROFILE%\.automotive-cursor-agents\config.json`**（Linux/macOS 为 **`~/.automotive-cursor-agents/config.json`**），**不要提交到 Git**。
+3. 之后同一台机器上无需再输入；**优先级**：环境变量 **`DEEPSEEK_API_KEY`** 高于已保存文件。
+4. 常用命令：`python -m tools.cursor_setup --status`（是否已配置）、`--force`（重新输入并覆盖文件）、`--clear`（仅删除文件中的 Key）。
+
+安装包后也可用控制台命令：**`automotive-cursor-setup`**（与上面等价）。
+
+## 与本仓库交互时
+
+- **多模型辩论（LLM Council）**：`python tools/llm_council.py "议题" -t general -r 1`（需已配置 Key，同上）。
+- **领域内容**（与 Claude Code 安装包同源，在 Cursor 中直接引用路径即可）：
+  - `skills/`、`rules/`、`agents/`、`workflows/`、`knowledge-base/`、`commands/`、`hooks/`。
+- 回答汽车软件、ISO 26262、AUTOSAR、MISRA、网络安全等问题时，**优先结合** `rules/` 与 `skills/` 下的相关文件做约束与补充说明。
+
+## 与 Claude Code 的差异
+
+- **不再依赖** `install.sh` 写入 `~/.claude`；在 Cursor 中打开本仓库即可配合本规则与上述脚本使用。
+- 若仍需在 **Claude Code** 中使用完整 slash 命令生态，可另行运行仓库中的 **`./install.sh`**。

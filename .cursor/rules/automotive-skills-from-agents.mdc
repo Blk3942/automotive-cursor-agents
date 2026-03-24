@@ -1,0 +1,36 @@
+---
+description: 用户提到 automotive agent 时，按 agents/*.md 的 Skills Activated 自动解析并 Read 对应 skill 文件
+alwaysApply: true
+---
+
+# 自动关联 Agent 与 Skill 文件
+
+本仓库的 Agent（`agents/**/*.md`）在 **「Skills Activated」** 下列出了建议配套的 skill 文件名（如 `radar-lidar-processing.md`）。仓库内实际内容多在 `skills/**/` 下，**没有**由脚本在运行时自动注入上下文；在 Cursor 中需由助手**主动读取**。
+
+## 何时执行
+
+当用户出现以下任一情况时，在给出专业技术结论**之前**应先解析并读取 skill：
+
+- 写明 **「Using automotive-…」** 或 **「使用 … agent」** 等；
+- 问题明显针对某个 **Agent 角色**（如 ADAS 感知、功能安全、AUTOSAR），且存在对应 `agents/` 下的 `.md`。
+
+## 操作步骤
+
+1. **定位 Agent 文件**  
+   用 Glob 搜索 `agents/**/*.md`，按名称或用户描述匹配（例如 `*perception-engineer*.md`、`adas-perception-engineer`）。
+
+2. **读取「Skills Activated」**  
+   打开匹配到的 Agent `.md`，找到列表中的 `*.md` 文件名。
+
+3. **在 `skills/` 中解析路径**  
+   对每个文件名执行 `Glob`：`skills/**/<文件名>`（例如 `skills/**/radar-lidar-processing.md`）。  
+   - 若**唯一命中**：用 **Read** 打开该文件。  
+   - 若**多条命中**：优先选择与 Agent 领域一致的目录（如 ADAS 感知 → `skills/automotive-adas/`），否则读取全部或向用户说明歧义。
+
+4. **再作答**  
+   技术回答应**显式对齐**已读 skill 中的术语、步骤与约束；若某文件不存在，说明缺失并基于已有材料回答。
+
+## 注意
+
+- **Claude Code** 侧：`install.sh` 安装后 skill 在 `~/.claude/skills/`，由 Claude Code 的 **Skill 发现机制**处理，与 Cursor 打开本仓库的行为**不同**。  
+- **全量 alwaysApply**：本规则始终生效，仅在触发上述条件时增加 Read；不必为每个问题都扫描所有 Agent。
